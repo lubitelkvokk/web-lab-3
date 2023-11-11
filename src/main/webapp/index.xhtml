@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>web-lab</title>
+    <h:outputStylesheet library="styles" name="header.css"/>
+        <h:outputStylesheet library="styles" name="table.css"/>
+    <!--    <h:outputStylesheet library="styles" name="errors.css"/>-->
+        <h:outputStylesheet library="styles" name="input-values.css"/>
+        <h:outputStylesheet library="styles" name="form-input-blocks.css"/>
+    <!--    <h:outputStylesheet library="styles" name="graph.css"/>-->
+        <h:outputStylesheet library="styles" name="main_page.css"/>
+</h:head>
+
+<header>
+    MIKHAILOV PAVEL MAXIMOVICH
+    <br></br>
+    P3217 VARIANT 1745
+</header>
+
+<h:body class="main_page">
+    <!--    <ui:include src="header.html"/>-->
+    <!--    <ui:include src="/template/graph.xhtml"/>-->
+
+    <h:form>
+        <h:inputText id="y" value="#{rowBean.y}">
+            <f:validateDoubleRange minimum="-5" maximum="3"/>
+        </h:inputText>
+        <h:message for="y" style="color: red" />
+        <h:commandButton value="Submit" action="#{rowBean.addToTable()}" />
+    </h:form>
+
+
+
+        <div class="tableContainer">
+            <table id="hit-results">
+                <thead>
+                <tr>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>R</th>
+                    <th>Current time</th>
+                    <th>Script runtime</th>
+                    <th>Hit result</th>
+                </tr>
+                </thead>
+                <tbody>
+                <ui:repeat value="#{table.table}" var="row">
+                    <tr>
+                        <td>#{row.x}</td>
+                        <td>#{row.y}</td>
+                        <td>#{row.r}</td>
+                        <td>#{row.currentTime}</td>
+                        <td>#{row.scriptRuntime}</td>
+                        <td>#{row.isHit}</td>
+                    </tr>
+                </ui:repeat>
+                </tbody>
+            </table>
+        </div>
+
+</h:body>
+<!--<h:outputScript library="scripts" name="bundle.js"/>-->
+</html>
