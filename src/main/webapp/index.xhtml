@@ -7,12 +7,12 @@
 <h:head>
     <title>web-lab</title>
     <h:outputStylesheet library="styles" name="header.css"/>
-        <h:outputStylesheet library="styles" name="table.css"/>
+    <h:outputStylesheet library="styles" name="table.css"/>
     <!--    <h:outputStylesheet library="styles" name="errors.css"/>-->
-        <h:outputStylesheet library="styles" name="input-values.css"/>
-        <h:outputStylesheet library="styles" name="form-input-blocks.css"/>
+    <h:outputStylesheet library="styles" name="input-values.css"/>
+    <h:outputStylesheet library="styles" name="form-input-blocks.css"/>
     <!--    <h:outputStylesheet library="styles" name="graph.css"/>-->
-        <h:outputStylesheet library="styles" name="main_page.css"/>
+    <h:outputStylesheet library="styles" name="main_page.css"/>
 </h:head>
 
 <header>
@@ -25,42 +25,57 @@
     <!--    <ui:include src="header.html"/>-->
     <!--    <ui:include src="/template/graph.xhtml"/>-->
 
+
     <h:form>
+        <h:panelGrid columns="1">
+            <p:inputText id="x" value="#{rowBean.x}"/>
+            <p:slider for="x" minValue="-5" maxValue="5" step="1" />
+        </h:panelGrid>
+
+        <br></br>
+
         <h:inputText id="y" value="#{rowBean.y}">
             <f:validateDoubleRange minimum="-5" maximum="3"/>
         </h:inputText>
-        <h:message for="y" style="color: red" />
-        <h:commandButton value="Submit" action="#{rowBean.addToTable()}" />
+        <h:message for="y" style="color: red"/>
+        <h:commandButton value="Submit" action="#{rowBean.addToTable()}"/>
+
+        <br></br>
+
+        <h:panelGrid columns="1">
+            <p:inputText id="r" value="#{rowBean.r}"/>
+            <p:slider for="r" minValue="1" maxValue="4" step="0.25" />
+        </h:panelGrid>
+
     </h:form>
 
 
-
-        <div class="tableContainer">
-            <table id="hit-results">
-                <thead>
+    <div class="tableContainer">
+        <table id="hit-results">
+            <thead>
+            <tr>
+                <th>X</th>
+                <th>Y</th>
+                <th>R</th>
+                <th>Current time</th>
+                <th>Script runtime</th>
+                <th>Hit result</th>
+            </tr>
+            </thead>
+            <tbody>
+            <ui:repeat value="#{table.table}" var="row">
                 <tr>
-                    <th>X</th>
-                    <th>Y</th>
-                    <th>R</th>
-                    <th>Current time</th>
-                    <th>Script runtime</th>
-                    <th>Hit result</th>
+                    <td>#{row.x}</td>
+                    <td>#{row.y}</td>
+                    <td>#{row.r}</td>
+                    <td>#{row.currentTime}</td>
+                    <td>#{row.scriptRuntime}</td>
+                    <td>#{row.isHit}</td>
                 </tr>
-                </thead>
-                <tbody>
-                <ui:repeat value="#{table.table}" var="row">
-                    <tr>
-                        <td>#{row.x}</td>
-                        <td>#{row.y}</td>
-                        <td>#{row.r}</td>
-                        <td>#{row.currentTime}</td>
-                        <td>#{row.scriptRuntime}</td>
-                        <td>#{row.isHit}</td>
-                    </tr>
-                </ui:repeat>
-                </tbody>
-            </table>
-        </div>
+            </ui:repeat>
+            </tbody>
+        </table>
+    </div>
 
 </h:body>
 <!--<h:outputScript library="scripts" name="bundle.js"/>-->

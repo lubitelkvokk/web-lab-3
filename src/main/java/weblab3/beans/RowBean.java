@@ -45,6 +45,7 @@ public class RowBean implements Serializable {
     }
 
     public void setX(double x) {
+        System.out.println("SETTING X");
         this.x = x;
     }
 
