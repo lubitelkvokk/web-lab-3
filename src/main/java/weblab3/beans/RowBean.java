@@ -53,6 +53,7 @@ public class RowBean implements Serializable {
     }
 
     public void setY(double y) {
+        System.out.println(y);
         this.y = y;
     }
 
