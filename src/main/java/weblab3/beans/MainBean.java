@@ -1,24 +1,44 @@
-package weblab3.beans;
-
-
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.component.UIComponent;
-import jakarta.faces.context.FacesContext;
-import jakarta.faces.validator.ValidatorException;
-import jakarta.inject.Named;
-
-// Аннотации managed bean компонента
-@Named("main") // определение managed bean и его наименования
-@ApplicationScoped          // определение времени жизни - request
-public class MainBean
-{
-
-    public void validateY(FacesContext context, UIComponent component, Object value) {
-        double yValue = (Double) value;
-        if (yValue < -5 || yValue > 3) {
-            FacesMessage message = new FacesMessage("Неверное значение! Введите число от -5 до 3.");
-            throw new ValidatorException(message);
-        }
-    }
-}
+//package weblab3.beans;
+//
+//
+//
+//// Аннотации managed bean компонента
+//@ManagedBean(name="Main") // определение managed bean и его наименования
+//@ApplicationScoped          // определение времени жизни - request
+//public class MainBean
+//{
+//    private String login;
+//    private String password;
+//
+//    public MainBean(){
+//        System.out.println("MAIN BEAN");
+//    }
+//
+//    public String getLogin() {
+//        return login;
+//    }
+//
+//    public void setLogin(String login) {
+//        this.login = login;
+//    }
+//
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//    /* Метод простейшей авторизации.
+//     * Выполняется проверка имени и пароля пользователя.
+//     * Результат проверки - наименование страницы перехода
+//     */
+//    public String checkLogin(){
+//        if (login.equalsIgnoreCase("alex") && password.equalsIgnoreCase("qwerty")){
+//            return "loginsuccess?faces-redirect=true";
+//        } else {
+//            return "loginfailed?faces-redirect=true";
+//        }
+//    }
+//}
