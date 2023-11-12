@@ -18,6 +18,20 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>10.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>12.0.0</version>
+            <classifier>jakarta</classifier>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/jakarta.faces/jakarta.faces-api -->
         <dependency>
             <groupId>jakarta.faces</groupId>
