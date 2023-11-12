@@ -23,29 +23,41 @@
 
 <h:body class="main_page">
     <!--    <ui:include src="header.html"/>-->
-    <!--    <ui:include src="/template/graph.xhtml"/>-->
+    <ui:include src="/template/graph.xhtml"/>
 
 
-    <h:form>
-        <h:panelGrid columns="1">
+    <h:form id="form-block">
+        <h:panelGrid id="x-input-block" columns="1">
             <p:inputText id="x" value="#{rowBean.x}"/>
-            <p:slider for="x" minValue="-5" maxValue="5" step="1" />
+            <p:slider for="x" minValue="-5" maxValue="5" step="1"/>
         </h:panelGrid>
 
         <br></br>
 
-        <h:inputText id="y" value="#{rowBean.y}">
+
+        <h:inputText style="font-size: 20px; color: #52079f;
+                            text-shadow: 1px 1px 1px #000;
+                            border-radius: 1px;
+                            width: 200px;
+                            mix-blend-mode: multiply;
+                            opacity: 90%" value="#{rowBean.y}">
             <f:validateDoubleRange minimum="-5" maximum="3"/>
         </h:inputText>
-        <h:message for="y" style="color: red"/>
-        <h:commandButton value="Submit" action="#{rowBean.addToTable()}"/>
+        <h:message for="y-input-block" style="color: red"/>
+
 
         <br></br>
 
-        <h:panelGrid columns="1">
+        <h:panelGrid id="r-input-block" columns="1">
             <p:inputText id="r" value="#{rowBean.r}"/>
-            <p:slider for="r" minValue="1" maxValue="4" step="0.25" />
+            <p:slider for="r" minValue="1" maxValue="4" step="0.25"/>
         </h:panelGrid>
+        <br></br>
+
+        <h:commandButton
+                style="font-size: 20px; color: #52079f;opacity: 80%; font-weight: bold; text-shadow: 1px 1px 1px #000; border-radius: 5px; mix-blend-mode: multiply;"
+                value="Submit" action="#{rowBean.addToTable()}"/>
+
 
     </h:form>
 
@@ -76,6 +88,11 @@
             </tbody>
         </table>
     </div>
+
+    <h:form>
+        <p:commandButton label="Current Time" action="success"/>
+    </h:form>
+
 
 </h:body>
 <!--<h:outputScript library="scripts" name="bundle.js"/>-->
