@@ -1,0 +1,66 @@
+#form-block{
+    font-family: 'Rubik One', sans-serif;
+    /*font-family: monospace;*/
+    width: 300px;
+    display: inline-block;
+    float: left;
+    margin-left: 150px;
+}
+
+#form-block label{
+
+    opacity: 70%;
+    font-size: 20px;
+    color: #ffffff;
+    text-shadow: 1px 2px 2px #000;
+}
+
+#form-block [id$=-input-block] {
+    opacity: 70%;
+    display: inline-block;
+    margin-top: 20px;
+    /*vertical-align: top;*/
+}
+
+
+[id$=-input-block] input{
+    font-size: 20px;
+    color: #52079f;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 5px;
+    mix-blend-mode: multiply;
+    opacity: 90%;
+
+    background-color: #bb6789;
+    margin:5px;
+}
+#y-input-block{
+    font-size: 20px;
+    padding-left: 20px;
+}
+#y-input-block input{
+    width: 180px;
+}
+
+#r-input-block{
+    padding-left: 50px;
+}
+
+#r-input-block input{
+    width: 180px;
+}
+
+#submit-container{
+    margin-top: 20px;
+    padding-left: 90px;
+}
+
+#submit-container{
+    font-size: 20px;
+    color: #52079f;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 5px;
+    mix-blend-mode: multiply;
+    opacity: 80%;
+}
+
