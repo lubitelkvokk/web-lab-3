@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
->
-
-<h:head>
-    <title>web-lab</title>
-    <h:outputStylesheet library="styles" name="graph.css"/>
-</h:head>
-
-<h:body>
-    ABOBA
-</h:body>
-
+<html>
+<head>
+    <title>Interactive Clock</title>
+    <script>
+        function updateClock() {
+            let now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            document.getElementById('clock').innerHTML = hours + ':' + minutes + ':' + seconds;
+        }
+        setInterval(updateClock, 11000);
+    </script>
+</head>
+<body>
+<h1>Interactive Clock</h1>
+<p>The current time is: <span id="clock"></span></p>
+</body>
 </html>

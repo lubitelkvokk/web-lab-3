@@ -5,6 +5,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import weblab3.beans.dao.HitDao;
 import weblab3.beans.models.Hit;
+import weblab3.beans.util.HitCheck;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -13,7 +14,7 @@ import java.util.Date;
 @Named("rowBean")
 @SessionScoped
 public class RowBean implements Serializable {
-//    private final String message = "SLAVE GAY";
+    //    private final String message = "SLAVE GAY";
     private double x;
     private double y;
     private double r;
@@ -68,6 +69,7 @@ public class RowBean implements Serializable {
     }
 
     public void setCurrentTime(String currentTime) {
+        System.out.println(123);
         this.currentTime = currentTime;
     }
 
@@ -80,10 +82,10 @@ public class RowBean implements Serializable {
     }
 
     public void addToTable() {
-        RowBean row = new RowBean(x, y, r, currentTime, isHit);
+        RowBean row = new RowBean(x, y, r, currentTime, HitCheck.hitCheck(x, y, r));
 
         //TODO Replace hardcode
-        HitDao.addHit(new Hit(x, y, r, new Date(), true));
+        HitDao.addHit(new Hit(x, y, r, new Date(), HitCheck.hitCheck(x, y, r)));
         tableBean.addToTable(row);
     }
 

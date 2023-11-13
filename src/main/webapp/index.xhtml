@@ -24,7 +24,7 @@
 <h:body class="main_page">
     <!--    <ui:include src="header.html"/>-->
 
-        <ui:include src="/template/graph.xhtml"/>
+    <ui:include src="/template/graph.xhtml"/>
 
 
     <h:form id="form-block">
@@ -47,6 +47,14 @@
         <h:message for="y-input-block" style="color: red"/>
 
 
+<!--        <h:inputHidden id="currentTime" value="#{rowBean.currentTime}">-->
+<!--            <f:convertDateTime pattern="HH:mm:ss"/>-->
+<!--        </h:inputHidden>-->
+<!--        <script type="text/javascript">-->
+<!--            let currentTime = new Date();-->
+<!--            document.getElementById('form-block:currentTime').value = currentTime.toISOString();-->
+<!--        </script>-->
+
         <br></br>
 
         <h:panelGrid id="r-input-block" columns="1">
@@ -57,11 +65,11 @@
 
         <div id="form-submit">
             <p:commandButton
-                style="font-size: 20px; color: #52079f;opacity: 80%; font-weight: bold; text-shadow: 1px 1px 1px #000; border-radius: 5px; mix-blend-mode: multiply;"
-                value="Submit"  update="updatePanel" action="#{rowBean.addToTable}" process="@form"/>
+                    style="font-size: 20px; color: #52079f;opacity: 80%; font-weight: bold; text-shadow: 1px 1px 1px #000; border-radius: 5px; mix-blend-mode: multiply;"
+                    value="Submit" update="updatePanel" action="#{rowBean.addToTable}" process="@form" ajax="true"/>
 
         </div>
-        
+
 
     </h:form>
 
@@ -83,7 +91,7 @@
                         <td id="x-col">#{row.x}</td>
                         <td id="y-col">#{row.y}</td>
                         <td id="r-col">#{row.r}</td>
-                        <td>#{row.currentTime}</td>
+                        <td>#{row.currentTime.toString()}</td>
                         <td>#{row.isHit}</td>
                     </tr>
                 </ui:repeat>
@@ -91,6 +99,7 @@
             </table>
         </div>
     </p:outputPanel>
+
     <h:form>
         <p:commandButton label="Current Time" action="success"/>
     </h:form>

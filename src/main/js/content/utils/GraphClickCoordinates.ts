@@ -25,7 +25,7 @@ export default function graphClickListener() {
 
             } else {
 
-                console.log("FIIIIIIREEEEE! RUUUUUN FOREST!");
+                // console.log("FIIIIIIREEEEE! RUUUUUN FOREST!");
             }
         }
 
@@ -34,7 +34,7 @@ export default function graphClickListener() {
 
 function pointScaling(x: number, y: number) {
     let r: number = parseFloat(getValue(getR()));
-    console.log(r)
+    // console.log(r)
     if (!r) {
 
     } else {

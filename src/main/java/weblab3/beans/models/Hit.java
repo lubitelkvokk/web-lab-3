@@ -1,6 +1,7 @@
 package weblab3.beans.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import weblab3.beans.util.HibernateUtil;
 
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "hit")
+@Data
 public class Hit {
 
     public Hit(Double x, Double y, Double r, Date currentTime, boolean hitResult) {
@@ -20,7 +22,8 @@ public class Hit {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "hit_seq")
+    @SequenceGenerator(name = "hit_seq", sequenceName = "hit_seq", allocationSize = 1)
     private Long id;
 
 
@@ -37,4 +40,8 @@ public class Hit {
 
     @Column(name = "hitResult")
     private boolean hitResult;
+
+    public Hit() {
+
+    }
 }

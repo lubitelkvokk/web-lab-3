@@ -22,7 +22,7 @@ export default function redraw(r:number) {
         circle.setAttribute("cy", "" + (150 - parseFloat(y.innerHTML) * 120 / r));
         circle.setAttribute("r", "2");
         circle.setAttribute('style', 'fill: blue; stroke: black; stroke-width: 2;');
-        console.log(circle);
+        // console.log(circle);
         element?.appendChild(circle);
         // graph?.appendChild(circle);
     }

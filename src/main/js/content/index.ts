@@ -18,7 +18,7 @@ let timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 //Проверка на change Y
 // rTextListening();
 
-graphClickListener();
+// graphClickListener();
 
 let r_block = document.getElementById('form-block:r-input-block') as HTMLInputElement;
 let r: any = null;

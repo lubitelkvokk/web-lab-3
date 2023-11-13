@@ -88,7 +88,7 @@ export function cleanAllErrors(){
     let x_error =  getXErrorField()
     let y_error =  getYErrorField()
     let r_error =  getRErrorField()
-    console.log(y_error!.textContent);
+    // console.log(y_error!.textContent);
     if (x_error !== null){
         x_error.textContent = "";
     }
