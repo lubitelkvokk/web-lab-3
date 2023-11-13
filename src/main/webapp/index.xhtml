@@ -23,7 +23,8 @@
 
 <h:body class="main_page">
     <!--    <ui:include src="header.html"/>-->
-    <ui:include src="/template/graph.xhtml"/>
+
+        <ui:include src="/template/graph.xhtml"/>
 
 
     <h:form id="form-block">
@@ -49,49 +50,52 @@
         <br></br>
 
         <h:panelGrid id="r-input-block" columns="1">
-            <p:inputText id="r" value="#{rowBean.r}"/>
-            <p:slider for="r" minValue="1" maxValue="4" step="0.25"/>
+            <p:inputText id="r" name="r-value" value="#{rowBean.r}"/>
+            <p:slider for="r" name="r-value" minValue="1" maxValue="4" step="0.25"/>
         </h:panelGrid>
         <br></br>
 
-        <h:commandButton
+        <div id="form-submit">
+            <p:commandButton
                 style="font-size: 20px; color: #52079f;opacity: 80%; font-weight: bold; text-shadow: 1px 1px 1px #000; border-radius: 5px; mix-blend-mode: multiply;"
-                value="Submit" action="#{rowBean.addToTable}"/>
+                value="Submit"  update="updatePanel" action="#{rowBean.addToTable}" process="@form"/>
 
+        </div>
+        
 
     </h:form>
 
-
-    <div class="tableContainer">
-        <table id="hit-results">
-            <thead>
-            <tr>
-                <th>X</th>
-                <th>Y</th>
-                <th>R</th>
-                <th>Current time</th>
-                <th>Hit result</th>
-            </tr>
-            </thead>
-            <tbody>
-            <ui:repeat value="#{table.table}" var="row">
+    <p:outputPanel id="updatePanel">
+        <div class="tableContainer">
+            <table id="hit-results">
+                <thead>
                 <tr>
-                    <td>#{row.x}</td>
-                    <td>#{row.y}</td>
-                    <td>#{row.r}</td>
-                    <td>#{row.currentTime}</td>
-                    <td>#{row.isHit}</td>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>R</th>
+                    <th>Current time</th>
+                    <th>Hit result</th>
                 </tr>
-            </ui:repeat>
-            </tbody>
-        </table>
-    </div>
-
+                </thead>
+                <tbody>
+                <ui:repeat value="#{table.table}" var="row">
+                    <tr>
+                        <td id="x-col">#{row.x}</td>
+                        <td id="y-col">#{row.y}</td>
+                        <td id="r-col">#{row.r}</td>
+                        <td>#{row.currentTime}</td>
+                        <td>#{row.isHit}</td>
+                    </tr>
+                </ui:repeat>
+                </tbody>
+            </table>
+        </div>
+    </p:outputPanel>
     <h:form>
         <p:commandButton label="Current Time" action="success"/>
     </h:form>
 
 
 </h:body>
-<!--<h:outputScript library="scripts" name="bundle.js"/>-->
+<h:outputScript library="js" name="bundle.js"/>
 </html>

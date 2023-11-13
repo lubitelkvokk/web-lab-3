@@ -7,14 +7,20 @@ import weblab3.beans.util.HibernateUtil;
 
 public class HitDao {
 
-    public void addHit(Hit hit){
+    private static Session session;
 
-        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+    static {
+        session = HibernateUtil.getSessionFactory().openSession();
+    }
+
+    public static void addHit(Hit hit) {
+
+        try {
             session.beginTransaction();
             session.persist(hit);
             session.getTransaction().commit();
 
-        } catch (HibernateException e){
+        } catch (HibernateException e) {
             System.out.println(e.getMessage());
         }
 

@@ -13,7 +13,7 @@ import java.util.Date;
 @Named("rowBean")
 @SessionScoped
 public class RowBean implements Serializable {
-    private final String message = "SLAVE GAY";
+//    private final String message = "SLAVE GAY";
     private double x;
     private double y;
     private double r;
@@ -81,9 +81,9 @@ public class RowBean implements Serializable {
 
     public void addToTable() {
         RowBean row = new RowBean(x, y, r, currentTime, isHit);
-        HitDao hitDao = new HitDao();
+
         //TODO Replace hardcode
-        hitDao.addHit(new Hit(x, y, r, new Date(), true));
+        HitDao.addHit(new Hit(x, y, r, new Date(), true));
         tableBean.addToTable(row);
     }
 

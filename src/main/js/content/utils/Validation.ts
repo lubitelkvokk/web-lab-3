@@ -60,17 +60,17 @@ export function validateInputElement(r: HTMLInputElement | null, rError: Element
     let isValid = true;
     // Проверка R
     if (r!.value == "" || r == null) {
-        rError!.textContent = `Value must be chosen`;
+        // rError!.textContent = `Value must be chosen`;
         isValid = false;
     } else {
         let r_number = parseFloat(r!.value.slice(0, 5));
         // console.log(/^\s*[0-9]+.?[0-9]*\s*$/.test(y.value));
         // console.log(!(/^\s*[0-9]+.?[0-9]*\s*$/.test(r.value)) || (r_number <= 2 || r_number >= 5))
         if (!(/^\s*[0-9]+.?[0-9]*\s*$/.test(r.value)) || (r_number <= lowerLimit || r_number >= upperLimit)) {
-            rError!.textContent = `${lowerLimit} < R < ${upperLimit}`;
+            // rError!.textContent = `${lowerLimit} < R < ${upperLimit}`;
             isValid = false;
         } else {
-            rError!.textContent = "";
+            // rError!.textContent = "";
         }
     }
     return isValid;
@@ -78,10 +78,10 @@ export function validateInputElement(r: HTMLInputElement | null, rError: Element
 
 
 export function validateR(){
-    return validateInputElement(document.querySelector("#r"),
+    return validateInputElement(document.getElementById("form-block:r") as HTMLInputElement,
         getRErrorField(),
-        2,
-        5);
+        1,
+        4);
 }
 
 export function cleanAllErrors(){

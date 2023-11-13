@@ -1,11 +1,10 @@
 package weblab3.beans;
 
-import jakarta.annotation.ManagedBean;
-import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.SessionScoped;
-import jakarta.faces.event.PhaseEvent;
-import jakarta.faces.event.PhaseId;
 import jakarta.inject.Named;
+
+import com.google.gson.Gson;
+import weblab3.beans.util.GetGson;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -27,5 +26,10 @@ public class TableBean implements Serializable {
 
     public void addToTable(RowBean row) {
         table.add(row);
+    }
+
+    public String getTableAsJson(){
+
+        return GetGson.getGson().toJson(table);
     }
 }
