@@ -1,29 +1,24 @@
 package weblab3.beans;
 
 import jakarta.enterprise.context.SessionScoped;
-
-
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import weblab3.beans.dao.HitDao;
+import weblab3.beans.models.Hit;
 
 import java.io.Serializable;
+import java.time.Instant;
+import java.util.Date;
 
 @Named("rowBean")
 @SessionScoped
 public class RowBean implements Serializable {
+    private final String message = "SLAVE GAY";
     private double x;
     private double y;
     private double r;
     private String currentTime;
-    private String scriptRuntime;
-    private String isHit;
-
-    public String getMessage() {
-        return "pacsss o";
-    }
-
-    private final String message = "SLAVE GAY";
-
+    private Boolean isHit;
     @Inject
     private TableBean tableBean;
 
@@ -31,13 +26,16 @@ public class RowBean implements Serializable {
         System.out.println("SLAVA GAY FROM ROW BEAN");
     }
 
-    public RowBean(double x, double y, double r, String currentTime, String scriptRuntime, String isHit) {
+    public RowBean(double x, double y, double r, String currentTime, Boolean isHit) {
         this.x = x;
         this.y = y;
         this.r = r;
         this.currentTime = currentTime;
-        this.scriptRuntime = scriptRuntime;
         this.isHit = isHit;
+    }
+
+    public String getMessage() {
+        return "pacsss o";
     }
 
     public double getX() {
@@ -73,24 +71,19 @@ public class RowBean implements Serializable {
         this.currentTime = currentTime;
     }
 
-    public String getScriptRuntime() {
-        return scriptRuntime;
-    }
-
-    public void setScriptRuntime(String scriptRuntime) {
-        this.scriptRuntime = scriptRuntime;
-    }
-
-    public String getIsHit() {
+    public Boolean getIsHit() {
         return isHit;
     }
 
-    public void setIsHit(String isHit) {
+    public void setIsHit(Boolean isHit) {
         this.isHit = isHit;
     }
 
     public void addToTable() {
-        RowBean row = new RowBean(x, y, r, currentTime, scriptRuntime, isHit);
+        RowBean row = new RowBean(x, y, r, currentTime, isHit);
+        HitDao hitDao = new HitDao();
+        //TODO Replace hardcode
+        hitDao.addHit(new Hit(x, y, r, new Date(), true));
         tableBean.addToTable(row);
     }
 
