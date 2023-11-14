@@ -22,26 +22,42 @@ let timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 let r_block = document.getElementById('form-block:r-input-block') as HTMLInputElement;
 let r: any = null;
-r_block.addEventListener("mouseover", function () {
-    setTimeout(() => {
-        r = document.getElementById('form-block:r') as HTMLInputElement;
-        if (validateR()) {
 
-            redraw(parseFloat(r.value));
-        }
-    }, 600)
 
-})
-
-r_block.addEventListener("input", function () {
-    setTimeout(() => {
+async function graphRedrawing() {
+    while (true) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
         r = document.getElementById('form-block:r') as HTMLInputElement;
         if (validateR()) {
             redraw(parseFloat(r.value));
         }
-    }, 600)
-})
+    }
+}
 
+// r_block.addEventListener("mouseover", function () {
+//
+// })
+
+// r_block.addEventListener("mouseup", function () {
+//     setTimeout(() => {
+//         r = document.getElementById('form-block:r') as HTMLInputElement;
+//         if (validateR()) {
+//
+//             redraw(parseFloat(r.value));
+//         }
+//     }, 600)
+// })
+//
+// r_block.addEventListener("input", function () {
+//     setTimeout(() => {
+//         r = document.getElementById('form-block:r') as HTMLInputElement;
+//         if (validateR()) {
+//             redraw(parseFloat(r.value));
+//         }
+//     }, 600)
+// })
+
+setTimeout(() =>     graphRedrawing(), 10000)
 
 
 document.querySelector("#form-submit")!.addEventListener("click", function () {

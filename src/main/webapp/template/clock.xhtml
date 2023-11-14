@@ -4,11 +4,17 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
 
 <body>
-    <div id="canv"></div>
+<div id="canv"></div>
 </body>
 <h:outputScript library="js" name="clock.js"/>
+
+<h:form>
+    <p:commandButton label="Current Time" action="backToIndex" value="Вернуться" icon="ui-icon-copy"/>
+</h:form>
+
 </html>
