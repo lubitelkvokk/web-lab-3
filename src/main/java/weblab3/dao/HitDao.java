@@ -1,9 +1,9 @@
-package weblab3.beans.dao;
+package weblab3.dao;
 
 import org.hibernate.HibernateException;
-import weblab3.beans.models.Hit;
+import weblab3.models.Hit;
 import org.hibernate.Session;
-import weblab3.beans.util.HibernateUtil;
+import weblab3.util.HibernateUtil;
 
 public class HitDao {
 
@@ -13,7 +13,7 @@ public class HitDao {
         session = HibernateUtil.getSessionFactory().openSession();
     }
 
-    public static void addHit(Hit hit) {
+    public void addHit(Hit hit) {
 
         try {
             session.beginTransaction();

@@ -1,4 +1,4 @@
-package weblab3.beans.util;
+package weblab3.util;
 
 import org.hibernate.cfg.Configuration;
 import org.hibernate.SessionFactory;

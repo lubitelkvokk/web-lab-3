@@ -1,4 +1,4 @@
-package weblab3.beans.util;
+package weblab3.util;
 
 import com.google.gson.Gson;
 

@@ -3,8 +3,8 @@ package weblab3.beans;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 
-import com.google.gson.Gson;
-import weblab3.beans.util.GetGson;
+import weblab3.models.Hit;
+import weblab3.util.GetGson;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,19 +13,20 @@ import java.util.List;
 @Named("table")
 @SessionScoped
 public class TableBean implements Serializable {
-    private final List<RowBean> table;
+    private final List<Hit> table;
 
     public TableBean() {
         table = new ArrayList<>();
     }
 
-    public List<RowBean> getTable() {
+    public List<Hit> getTable() {
         return table;
     }
 
-    public void addToTable(RowBean row) {
+    public void addToTable(Hit row) {
         table.add(row);
     }
+
 
     public String getTableAsJson(){
 

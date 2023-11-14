@@ -17,6 +17,11 @@ let timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 // graphClickListener();
 
+// document.querySelector(".svg-graph")!.addEventListener("click", function () {
+//
+// })
+
+
 let r_block = document.getElementById('form-block:r-input-block') as HTMLInputElement;
 let r: any = null;
 
@@ -31,7 +36,7 @@ async function graphRedrawing() {
     }
 }
 
-setTimeout(() => graphRedrawing(), 10000)
+setTimeout(() => graphRedrawing(), 1000)
 
 
 document.querySelector("#form-submit")!.addEventListener("click", function () {

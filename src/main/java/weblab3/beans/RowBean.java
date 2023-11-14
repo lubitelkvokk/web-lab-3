@@ -3,12 +3,12 @@ package weblab3.beans;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
-import weblab3.beans.dao.HitDao;
-import weblab3.beans.models.Hit;
-import weblab3.beans.util.HitCheck;
+
+import weblab3.dao.HitDao;
+import weblab3.models.Hit;
+import weblab3.util.HitCheck;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.Date;
 
 @Named("rowBean")
@@ -18,7 +18,7 @@ public class RowBean implements Serializable {
     private double x;
     private double y;
     private double r;
-    private String currentTime;
+    private Date currentTime;
     private Boolean isHit;
     @Inject
     private TableBean tableBean;
@@ -26,7 +26,7 @@ public class RowBean implements Serializable {
     public RowBean() {
     }
 
-    public RowBean(double x, double y, double r, String currentTime, Boolean isHit) {
+    public RowBean(double x, double y, double r, Date currentTime, Boolean isHit) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -63,11 +63,12 @@ public class RowBean implements Serializable {
         this.r = r;
     }
 
-    public String getCurrentTime() {
+    public Date getCurrentTime() {
+        System.out.println(currentTime);
         return currentTime;
     }
 
-    public void setCurrentTime(String currentTime) {
+    public void setCurrentTime(Date currentTime) {
 //        System.out.println(123);
         this.currentTime = currentTime;
     }
@@ -81,16 +82,18 @@ public class RowBean implements Serializable {
     }
 
     public void addToTable() {
-        RowBean row = new RowBean(x, y, r, currentTime, HitCheck.hitCheck(x, y, r));
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println(r);
+        try {
+            Date date = new Date();
+            isHit = HitCheck.hitCheck(x, y, r);
+            currentTime = date;
+            Hit hit = new Hit(x, y, r, date, HitCheck.hitCheck(x, y, r));
 
-        HitDao.addHit(new Hit(x, y, r, new Date(), HitCheck.hitCheck(x, y, r)));
-        System.out.println(x);
-        System.out.println(y);
-        System.out.println(r);
-        tableBean.addToTable(row);
+            HitDao hitDao = new HitDao();
+            hitDao.addHit(hit);
+            tableBean.addToTable(hit);
+        } catch (NumberFormatException e) {
+
+        }
     }
 
     public TableBean getTableBean() {

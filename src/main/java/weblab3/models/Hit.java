@@ -1,8 +1,7 @@
-package weblab3.beans.models;
+package weblab3.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import weblab3.beans.util.HibernateUtil;
 
 import java.util.Date;
 
