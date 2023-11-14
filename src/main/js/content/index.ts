@@ -1,11 +1,8 @@
-import validation, { validateR } from "./utils/Validation";
-import { rTextListening, xButtonsListening, yTextListening } from "./specific_functions/ButtonsListening";
-import { getR, getRErrorField, getX, getXErrorField, getY, getYErrorField } from "./specific_functions/SelectionResults";
+import validation, {validateR} from "./utils/Validation";
+import {rTextListening, xButtonsListening, yTextListening} from "./specific_functions/ButtonsListening";
+import {getR, getRErrorField, getX, getXErrorField, getY, getYErrorField} from "./specific_functions/SelectionResults";
 import graphClickListener from "./utils/GraphClickCoordinates";
 import redraw from "./specific_functions/GraphRedraw";
-
-
-
 
 
 let timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -26,7 +23,7 @@ let r: any = null;
 
 async function graphRedrawing() {
     while (true) {
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        await new Promise(resolve => setTimeout(resolve, 500));
         r = document.getElementById('form-block:r') as HTMLInputElement;
         if (validateR()) {
             redraw(parseFloat(r.value));
@@ -34,30 +31,7 @@ async function graphRedrawing() {
     }
 }
 
-// r_block.addEventListener("mouseover", function () {
-//
-// })
-
-// r_block.addEventListener("mouseup", function () {
-//     setTimeout(() => {
-//         r = document.getElementById('form-block:r') as HTMLInputElement;
-//         if (validateR()) {
-//
-//             redraw(parseFloat(r.value));
-//         }
-//     }, 600)
-// })
-//
-// r_block.addEventListener("input", function () {
-//     setTimeout(() => {
-//         r = document.getElementById('form-block:r') as HTMLInputElement;
-//         if (validateR()) {
-//             redraw(parseFloat(r.value));
-//         }
-//     }, 600)
-// })
-
-setTimeout(() =>     graphRedrawing(), 10000)
+setTimeout(() => graphRedrawing(), 10000)
 
 
 document.querySelector("#form-submit")!.addEventListener("click", function () {
@@ -65,7 +39,6 @@ document.querySelector("#form-submit")!.addEventListener("click", function () {
         redraw(parseFloat(r.value));
     }
 })
-
 
 
 function addRowToTable(html: string) {

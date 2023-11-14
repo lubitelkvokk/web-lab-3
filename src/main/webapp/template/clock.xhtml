@@ -6,15 +6,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <h:outputStylesheet library="styles" name="clock.css"/>
+</h:head>
 
-
-<body>
+<body class="clock-page">
 <div id="canv"></div>
+<br/>
+<h:form>
+    <p:commandButton label="Current Time" style="mix-blend-mode: multiply;" action="backToIndex" value="Вернуться"/>
+</h:form>
 </body>
 <h:outputScript library="js" name="clock.js"/>
 
-<h:form>
-    <p:commandButton label="Current Time" action="backToIndex" value="Вернуться" icon="ui-icon-copy"/>
-</h:form>
 
 </html>

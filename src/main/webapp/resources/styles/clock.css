@@ -1,0 +1,8 @@
+.clock-page{
+    background-image: url("../resources/images/background-5.jpg");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

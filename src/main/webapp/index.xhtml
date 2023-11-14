@@ -26,52 +26,59 @@
 
     <ui:include src="/template/graph.xhtml"/>
 
+    <div>
+        <h:form id="form-block">
+            <h:panelGrid id="x-input-block" columns="1">
+                <p:inputText id="x" value="#{rowBean.x}"/>
+                <p:slider for="x" minValue="-5" maxValue="5" step="1"/>
+            </h:panelGrid>
 
-    <h:form id="form-block">
-        <h:panelGrid id="x-input-block" columns="1">
-            <p:inputText id="x" value="#{rowBean.x}"/>
-            <p:slider for="x" minValue="-5" maxValue="5" step="1"/>
-        </h:panelGrid>
-
-        <br></br>
+            <br></br>
 
 
-        <h:inputText style="font-size: 20px; color: #52079f;
+            <h:inputText style="font-size: 20px; color: #52079f;
                             text-shadow: 1px 1px 1px #000;
                             border-radius: 1px;
                             width: 200px;
                             mix-blend-mode: multiply;
                             opacity: 90%" value="#{rowBean.y}">
-            <f:validateDoubleRange minimum="-5" maximum="3"/>
-        </h:inputText>
-        <h:message for="y-input-block" style="color: red"/>
+                <f:validateDoubleRange minimum="-5" maximum="3"/>
+            </h:inputText>
+            <h:message for="y-input-block" style="color: red"/>
 
 
-<!--        <h:inputHidden id="currentTime" value="#{rowBean.currentTime}">-->
-<!--            <f:convertDateTime pattern="HH:mm:ss"/>-->
-<!--        </h:inputHidden>-->
-<!--        <script type="text/javascript">-->
-<!--            let currentTime = new Date();-->
-<!--            document.getElementById('form-block:currentTime').value = currentTime.toISOString();-->
-<!--        </script>-->
+            <!--        <h:inputHidden id="currentTime" value="#{rowBean.currentTime}">-->
+            <!--            <f:convertDateTime pattern="HH:mm:ss"/>-->
+            <!--        </h:inputHidden>-->
+            <!--        <script type="text/javascript">-->
+            <!--            let currentTime = new Date();-->
+            <!--            document.getElementById('form-block:currentTime').value = currentTime.toISOString();-->
+            <!--        </script>-->
 
-        <br></br>
+            <br></br>
 
-        <h:panelGrid id="r-input-block" columns="1">
-            <p:inputText id="r" name="r-value" value="#{rowBean.r}"/>
-            <p:slider for="r" name="r-value" minValue="1" maxValue="4" step="0.25"/>
-        </h:panelGrid>
-        <br></br>
+            <h:panelGrid id="r-input-block" columns="1">
+                <p:inputText id="r" name="r-value" value="#{rowBean.r}"/>
+                <p:slider for="r" name="r-value" minValue="1" maxValue="4" step="0.25"/>
+            </h:panelGrid>
+            <br></br>
 
-        <div id="form-submit">
-            <p:commandButton
-                    style="font-size: 20px; color: #52079f;opacity: 80%; font-weight: bold; text-shadow: 1px 1px 1px #000; border-radius: 5px; mix-blend-mode: multiply;"
-                    value="Submit" update="updatePanel" action="#{rowBean.addToTable}" process="@form" ajax="true"/>
+            <div id="form-submit" style="width: 120px">
+                <p:commandButton
+                        style="width:120px; font-size: 20px; font-weight: bold; text-shadow: 1px 1px 1px #000; border-radius: 5px; mix-blend-mode: multiply;"
+                        value="Submit" update="updatePanel" action="#{rowBean.addToTable}" process="@form" ajax="true"
+                        icon="ui-icon-copy"/>
 
-        </div>
+            </div>
+        </h:form>
 
+        <h:form style="margin-left: 150px; width: 120px">
+            <p:commandButton label="Current Time"
+                             style="margin-top: 10px; text-shadow: 1px 1px 1px #000; border-radius: 5px; font-size: 20px; font-weight: bold;mix-blend-mode: multiply;"
+                             action="success" value="Часы" icon="ui-icon-copy"/>
+        </h:form>
+    </div>
 
-    </h:form>
 
     <p:outputPanel id="updatePanel">
         <div class="tableContainer">
@@ -99,10 +106,6 @@
             </table>
         </div>
     </p:outputPanel>
-
-    <h:form>
-        <p:commandButton label="Current Time" action="success" value="Часы" icon="ui-icon-copy"/>
-    </h:form>
 
 
 </h:body>

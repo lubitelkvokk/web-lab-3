@@ -17,7 +17,6 @@ public class TableBean implements Serializable {
 
     public TableBean() {
         table = new ArrayList<>();
-        System.out.println("SLAVA GAY FROM TABLE BEAN");
     }
 
     public List<RowBean> getTable() {

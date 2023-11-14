@@ -24,7 +24,6 @@ public class RowBean implements Serializable {
     private TableBean tableBean;
 
     public RowBean() {
-        System.out.println("SLAVA GAY FROM ROW BEAN");
     }
 
     public RowBean(double x, double y, double r, String currentTime, Boolean isHit) {
@@ -44,7 +43,7 @@ public class RowBean implements Serializable {
     }
 
     public void setX(double x) {
-        System.out.println("SETTING X");
+        System.out.println("SETTING X: " + x);
         this.x = x;
     }
 
@@ -69,7 +68,7 @@ public class RowBean implements Serializable {
     }
 
     public void setCurrentTime(String currentTime) {
-        System.out.println(123);
+//        System.out.println(123);
         this.currentTime = currentTime;
     }
 
@@ -83,9 +82,14 @@ public class RowBean implements Serializable {
 
     public void addToTable() {
         RowBean row = new RowBean(x, y, r, currentTime, HitCheck.hitCheck(x, y, r));
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println(r);
 
-        //TODO Replace hardcode
         HitDao.addHit(new Hit(x, y, r, new Date(), HitCheck.hitCheck(x, y, r)));
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println(r);
         tableBean.addToTable(row);
     }
 
