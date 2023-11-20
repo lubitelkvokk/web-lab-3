@@ -1,22 +1,31 @@
 package weblab3.util;
 
-import org.hibernate.cfg.Configuration;
+import jakarta.annotation.PostConstruct;
+
+import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Named;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
-public class HibernateUtil {
+import java.io.Serializable;
 
-    private static SessionFactory sessionFactory = null;
+@Named("hibernateUtil")
+@ApplicationScoped
+public class HibernateUtil implements Serializable {
+    private final SessionFactory sessionFactory;
 
-    static {
-        try {
-            sessionFactory = new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
-            System.err.println("Initial SessionFactory creation failed." + ex);
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public static SessionFactory getSessionFactory() {
+    public org.hibernate.SessionFactory getSessionFactory() {
         return sessionFactory;
     }
+
+    public HibernateUtil() {
+        sessionFactory = new Configuration().configure().buildSessionFactory();
+    }
+
+    @PreDestroy
+    public void destroy() {
+        sessionFactory.close();
+    }
+
 }

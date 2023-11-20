@@ -14,10 +14,33 @@ import java.util.List;
 @SessionScoped
 public class TableBean implements Serializable {
     private final List<Hit> table;
+    private Integer pages;
 
-    public TableBean() {
+    public TableBean(){
         table = new ArrayList<>();
+        pageSize = 10;
     }
+    public Integer getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Integer pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    private Integer pageSize;
+    public Integer getPages() {
+        return pages;
+    }
+
+    public void setPages(Integer pages) {
+        this.pages = pages;
+    }
+
+
+
+
+
 
     public List<Hit> getTable() {
         return table;

@@ -14,7 +14,11 @@ import java.util.Date;
 @Named("rowBean")
 @SessionScoped
 public class RowBean implements Serializable {
-    //    private final String message = "SLAVE GAY";
+
+    @Inject
+    private HitDao hitDao;
+
+
     private double x;
     private double y;
     private double r;
@@ -88,9 +92,11 @@ public class RowBean implements Serializable {
             currentTime = date;
             Hit hit = new Hit(x, y, r, date, HitCheck.hitCheck(x, y, r));
 
-            HitDao hitDao = new HitDao();
             hitDao.addHit(hit);
             tableBean.addToTable(hit);
+
+
+            System.out.println(hitDao.getPaginationHitList(10, 1));
         } catch (NumberFormatException e) {
 
         }
