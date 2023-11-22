@@ -2,13 +2,15 @@ package weblab3.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import weblab3.util.Decimalise;
 
+import java.text.ParseException;
 import java.util.Date;
 
 
 @Entity
 @Table(name = "hit")
-@Data
+
 public class Hit {
 
     public Hit(Double x, Double y, Double r, Date currentTime, boolean hitResult) {
@@ -26,6 +28,46 @@ public class Hit {
     private Long id;
 
 
+    public Double getX() throws ParseException {
+        return Decimalise.decimalise(x);
+    }
+
+    public void setX(Double x) {
+        this.x = x;
+    }
+
+    public Double getY() throws ParseException {
+        return Decimalise.decimalise(y);
+    }
+
+    public void setY(Double y) {
+        this.y = y;
+    }
+
+    public Double getR() throws ParseException {
+        return Decimalise.decimalise(r);
+    }
+
+    public void setR(Double r) {
+        this.r = r;
+    }
+
+    public Date getCurrentTime() {
+        return currentTime;
+    }
+
+    public void setCurrentTime(Date currentTime) {
+        this.currentTime = currentTime;
+    }
+
+    public boolean isHitResult() {
+        return hitResult;
+    }
+
+    public void setHitResult(boolean hitResult) {
+        this.hitResult = hitResult;
+    }
+
     @Column(name = "x")
     private Double x;
 
@@ -41,6 +83,7 @@ public class Hit {
     private boolean hitResult;
 
     public Hit() {
-
     }
+
+
 }

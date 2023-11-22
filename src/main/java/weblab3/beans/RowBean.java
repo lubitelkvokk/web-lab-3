@@ -6,9 +6,12 @@ import jakarta.inject.Named;
 
 import weblab3.dao.HitDao;
 import weblab3.models.Hit;
+import weblab3.util.Decimalise;
 import weblab3.util.HitCheck;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.util.Date;
 
 @Named("rowBean")
@@ -47,7 +50,6 @@ public class RowBean implements Serializable {
     }
 
     public void setX(double x) {
-        System.out.println("SETTING X: " + x);
         this.x = x;
     }
 
@@ -68,12 +70,10 @@ public class RowBean implements Serializable {
     }
 
     public Date getCurrentTime() {
-        System.out.println(currentTime);
         return currentTime;
     }
 
     public void setCurrentTime(Date currentTime) {
-//        System.out.println(123);
         this.currentTime = currentTime;
     }
 
@@ -90,13 +90,14 @@ public class RowBean implements Serializable {
             Date date = new Date();
             isHit = HitCheck.hitCheck(x, y, r);
             currentTime = date;
-            Hit hit = new Hit(x, y, r, date, HitCheck.hitCheck(x, y, r));
+
+            Hit hit = new Hit(x, y, r,
+                    date,
+                    HitCheck.hitCheck(x, y, r));
 
             hitDao.addHit(hit);
-            tableBean.addToTable(hit);
+            tableBean.addToCurrentResults(hit);
 
-
-            System.out.println(hitDao.getPaginationHitList(10, 1));
         } catch (NumberFormatException e) {
 
         }

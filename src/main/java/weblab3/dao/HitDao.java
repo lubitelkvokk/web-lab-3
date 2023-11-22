@@ -1,5 +1,6 @@
 package weblab3.dao;
 
+import jakarta.annotation.Priority;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -24,9 +25,6 @@ public class HitDao implements Serializable {
     @Inject
     private UserSession userSession;
 
-//    public HitDao() {
-//        Session session = userSession.getSession();
-//    }
 
     public void addHit(Hit hit) {
         Session session = userSession.getSession();
@@ -43,6 +41,7 @@ public class HitDao implements Serializable {
     //    public List<Hit> getPaginationHitList(Integer pageSize, Integer pageNumber) {
 
     public List<Hit> getPaginationHitList(int pageSize, int pageNumber) {
+        System.out.println(pageNumber);
         Session session = userSession.getSession();
         CriteriaBuilder builder = session.getCriteriaBuilder();
         CriteriaQuery<Hit> criteria = builder.createQuery(Hit.class);
