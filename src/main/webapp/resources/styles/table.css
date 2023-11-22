@@ -1,8 +1,16 @@
 .tableContainer {
-    margin-left: 150px;
-    height: 300px;
-    overflow: auto;
-    width: 800px;
+    /*margin-left: 150px;*/
+    /*height: 200px;*/
+    /*overflow: auto;*/
+    /*width: 800px;*/
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+
+.visibleTableContainer{
+    width: 100%;
 }
 
 table {
