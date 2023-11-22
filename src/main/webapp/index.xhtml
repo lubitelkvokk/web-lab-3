@@ -24,10 +24,75 @@
 <h:body class="main_page">
     <!--    <ui:include src="header.html"/>-->
 
-    <ui:include src="/template/graph.xhtml"/>
+    <ui:include style="display: inline-block; width: 300px" src="/template/graph.xhtml"/>
+    <div style="width: 800px">
 
-    <div>
-        <h:form id="form-block">
+        <div style="display: inline-block; width: 500px">
+        <p:outputPanel id="updatePanel">
+            <div class="visibleTableContainer">
+                <table id="visibleHitResults">
+                    <thead>
+                    <tr>
+                        <th>X</th>
+                        <th>Y</th>
+                        <th>R</th>
+                        <th>Current time</th>
+                        <th>Hit result</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <ui:repeat value="#{table.getTablePage()}" var="row">
+                        <tr>
+                            <td id="visible-x-col">#{row.x}</td>
+                            <td id="visible-y-col">#{row.y}</td>
+                            <td id="visible-r-col">#{row.r}</td>
+                            <td>#{row.currentTime}</td>
+                            <td id="visible-hit-col">#{row.hitResult}</td>
+                        </tr>
+                    </ui:repeat>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tableContainer">
+                <table id="hit-results">
+                    <thead>
+                    <tr>
+                        <th>X</th>
+                        <th>Y</th>
+                        <th>R</th>
+                        <th>Current time</th>
+                        <th>Hit result</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <ui:repeat value="#{table.getCurrentResults()}" var="row">
+                        <tr>
+                            <td id="x-col">#{row.x}</td>
+                            <td id="y-col">#{row.y}</td>
+                            <td id="r-col">#{row.r}</td>
+                            <td>#{row.currentTime}</td>
+                            <td id="hit-col">#{row.hitResult}</td>
+                        </tr>
+                    </ui:repeat>
+                    </tbody>
+                </table>
+            </div>
+        </p:outputPanel>
+
+        <h:form style="width: 120px">
+            <h:inputText style="font-size: 20px; color: #52079f;
+                            text-shadow: 1px 1px 1px #000;
+                            border-radius: 1px;
+                            width: 200px;
+                            mix-blend-mode: multiply;
+                            opacity: 90%" value="#{table.pageNumber}">
+                <f:validateDoubleRange minimum="1"/>
+            </h:inputText>
+            <h:commandButton value="Submit" update="updatePanel" action="#{table.loadPage()}" process="@form"
+                             ajax="true"/>
+        </h:form>
+    </div>
+        <h:form style="display: inline-block" id="form-block">
             <h:panelGrid id="x-input-block" columns="1">
                 <p:inputText id="x" value="#{rowBean.x}"/>
                 <p:slider for="x" minValue="-5" maxValue="5" step="1"/>
@@ -46,15 +111,6 @@
             </h:inputText>
             <h:message for="y-input-block" style="color: red"/>
 
-
-            <!--        <h:inputHidden id="currentTime" value="#{rowBean.currentTime}">-->
-            <!--            <f:convertDateTime pattern="HH:mm:ss"/>-->
-            <!--        </h:inputHidden>-->
-            <!--        <script type="text/javascript">-->
-            <!--            let currentTime = new Date();-->
-            <!--            document.getElementById('form-block:currentTime').value = currentTime.toISOString();-->
-            <!--        </script>-->
-
             <br></br>
 
             <h:panelGrid id="r-input-block" columns="1">
@@ -72,40 +128,14 @@
             </div>
         </h:form>
 
-        <h:form style="margin-left: 150px; width: 120px">
-            <p:commandButton label="Current Time"
-                             style="margin-top: 10px; text-shadow: 1px 1px 1px #000; border-radius: 5px; font-size: 20px; font-weight: bold;mix-blend-mode: multiply;"
-                             action="success" value="Часы" icon="ui-icon-copy"/>
-        </h:form>
     </div>
 
+    <h:form style="margin-left: 150px; width: 120px">
+        <p:commandButton label="Current Time"
+                         style="margin-top: 10px; text-shadow: 1px 1px 1px #000; border-radius: 5px; font-size: 20px; font-weight: bold;mix-blend-mode: multiply;"
+                         action="success" value="Часы" icon="ui-icon-copy"/>
+    </h:form>
 
-    <p:outputPanel id="updatePanel">
-        <div class="tableContainer">
-            <table id="hit-results">
-                <thead>
-                <tr>
-                    <th>X</th>
-                    <th>Y</th>
-                    <th>R</th>
-                    <th>Current time</th>
-                    <th>Hit result</th>
-                </tr>
-                </thead>
-                <tbody>
-                <ui:repeat value="#{table.table}" var="row">
-                    <tr>
-                        <td id="x-col">#{row.x}</td>
-                        <td id="y-col">#{row.y}</td>
-                        <td id="r-col">#{row.r}</td>
-                        <td>#{row.currentTime}</td>
-                        <td id="hit-col">#{row.hitResult}</td>
-                    </tr>
-                </ui:repeat>
-                </tbody>
-            </table>
-        </div>
-    </p:outputPanel>
 
 
 </h:body>
