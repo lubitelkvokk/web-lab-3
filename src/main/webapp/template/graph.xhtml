@@ -11,7 +11,7 @@
 
 <h:body>
 
-    <h:form id="hidden-form">
+    <h:form id="hidden-form" style="display: none">
         <h:inputHidden id="x-hidden" value="#{rowBean.x}"/>
         <h:inputHidden id="y-hidden" value="#{rowBean.y}"/>
         <h:inputHidden id="r-hidden" value="#{rowBean.r}"/>
@@ -77,7 +77,6 @@
             // console.log(r.value);
             // console.log((x - (window.x + 150)) * scale);
             // console.log(((window.y + 150) - y) * scale);
-
             document.getElementById('hidden-form:x-hidden').setAttribute("value", "" + (x - (window.x + 150)) * scale);
             document.getElementById('hidden-form:y-hidden').setAttribute("value", "" + ((window.y + 150) - y) * scale);
             document.getElementById('hidden-form:r-hidden').setAttribute("value", r.value);
