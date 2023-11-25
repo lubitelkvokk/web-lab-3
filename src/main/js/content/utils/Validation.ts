@@ -66,7 +66,7 @@ export function validateInputElement(r: HTMLInputElement | null, rError: Element
         let r_number = parseFloat(r!.value.slice(0, 5));
         // console.log(/^\s*[0-9]+.?[0-9]*\s*$/.test(y.value));
         // console.log(!(/^\s*[0-9]+.?[0-9]*\s*$/.test(r.value)) || (r_number <= 2 || r_number >= 5))
-        if (!(/^\s*[0-9]+.?[0-9]*\s*$/.test(r.value)) || (r_number <= lowerLimit || r_number >= upperLimit)) {
+        if (!(/^\s*[0-9]+.?[0-9]*\s*$/.test(r.value)) || (r_number < lowerLimit || r_number > upperLimit)) {
             // rError!.textContent = `${lowerLimit} < R < ${upperLimit}`;
             isValid = false;
         } else {

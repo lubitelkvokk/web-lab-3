@@ -6,7 +6,6 @@ function checkBounds(x: number, y: number, r: number) {
 
 
     if (x < -5 || x > 5 || y < -5 || y > 3 || r < 1 || r > 4) {
-
         return false;
     }
     if ((x <= 0) && (y >= 0) && ((x * x + y * y) <= r * r)) {
