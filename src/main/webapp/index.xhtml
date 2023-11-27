@@ -53,6 +53,8 @@
                     </tbody>
                 </table>
             </div>
+        </p:outputPanel>
+        <p:outputPanel id="updateResults">
             <div class="tableContainer">
                 <table id="hit-results">
                     <thead>
@@ -79,6 +81,7 @@
             </div>
         </p:outputPanel>
 
+
         <h:form style="width: 120px">
             <h:inputText style="font-size: 20px; color: #52079f;
                             text-shadow: 1px 1px 1px #000;
@@ -88,8 +91,7 @@
                             opacity: 90%" value="#{table.pageNumber}">
                 <f:validateDoubleRange minimum="1"/>
             </h:inputText>
-            <h:commandButton value="Submit" update="updatePanel" action="#{table.loadPage()}" process="@form"
-                             ajax="true"/>
+            <p:commandButton value="Submit" update="updatePanel" action="#{table.loadPage()}" process="@form" ajax="true"/>
         </h:form>
     </div>
         <h:form style="display: inline-block" id="form-block">
@@ -122,7 +124,7 @@
             <div id="form-submit" style="width: 120px">
                 <p:commandButton
                         style="width:120px; font-size: 20px; font-weight: bold; text-shadow: 1px 1px 1px #000; border-radius: 5px; mix-blend-mode: multiply;"
-                        value="Submit" update="updatePanel" action="#{rowBean.addToTable}" process="@form" ajax="true"
+                        value="Submit" update="updateResults" action="#{rowBean.addToTable}" process="@form" ajax="true"
                         icon="ui-icon-copy"/>
 
             </div>

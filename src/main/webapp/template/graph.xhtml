@@ -16,7 +16,7 @@
         <h:inputHidden id="y-hidden" value="#{rowBean.y}"/>
         <h:inputHidden id="r-hidden" value="#{rowBean.r}"/>
         <p:commandButton id="submit-hidden" action="#{rowBean.addToTable}" style="visibility:hidden;" type="submit"
-                         ajax="true" update="updatePanel"></p:commandButton>
+                         ajax="true" update="updateResults"></p:commandButton>
     </h:form>
 
     <svg xmlns="http://www.w3.org/2000/svg" class="svg-graph" width="300" height="300" onclick="handleClick(event)">
@@ -72,11 +72,7 @@
             const x = event.clientX;
             const y = event.clientY;
             const scale = parseFloat(r.value) / 120;
-            // console.log(x);
-            // console.log((window.x + 150));
-            // console.log(r.value);
-            // console.log((x - (window.x + 150)) * scale);
-            // console.log(((window.y + 150) - y) * scale);
+
             document.getElementById('hidden-form:x-hidden').setAttribute("value", "" + (x - (window.x + 150)) * scale);
             document.getElementById('hidden-form:y-hidden').setAttribute("value", "" + ((window.y + 150) - y) * scale);
             document.getElementById('hidden-form:r-hidden').setAttribute("value", r.value);

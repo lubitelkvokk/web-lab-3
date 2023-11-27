@@ -1,6 +1,7 @@
 package weblab3.util;
 
 import jakarta.annotation.PreDestroy;
+import jakarta.enterprise.context.RequestScoped;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -10,7 +11,7 @@ import java.io.Serializable;
 
 
 @Named("userSession")
-@SessionScoped
+@RequestScoped
 public class UserSession implements Serializable {
 
     @Inject
