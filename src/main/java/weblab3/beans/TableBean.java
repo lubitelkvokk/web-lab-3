@@ -59,7 +59,6 @@ public class TableBean implements Serializable {
 
 
     public void loadPage() {
-
         tablePage = hitDao.getPaginationHitList(pageSize, pageNumber);
     }
 

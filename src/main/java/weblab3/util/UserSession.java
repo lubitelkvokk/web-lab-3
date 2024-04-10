@@ -19,7 +19,6 @@ public class UserSession implements Serializable {
     private final Session session;
 
     public UserSession(){
-        hibernateUtil = new HibernateUtil();
         session = hibernateUtil.getSessionFactory().openSession();
     }
 

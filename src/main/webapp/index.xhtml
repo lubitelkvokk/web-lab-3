@@ -123,18 +123,16 @@
 
             <div id="form-submit" style="width: 120px">
                 <p:commandButton
-                        style="width:120px; font-size: 20px; font-weight: bold; text-shadow: 1px 1px 1px #000; border-radius: 5px; mix-blend-mode: multiply;"
                         value="Submit" update="updateResults" action="#{rowBean.addToTable}" process="@form" ajax="true"
-                        icon="ui-icon-copy"/>
+                        />
 
             </div>
         </h:form>
 
     </div>
 
-    <h:form style="margin-left: 150px; width: 120px">
+    <h:form style="margin-top: 10px">
         <p:commandButton label="Current Time"
-                         style="margin-top: 10px; text-shadow: 1px 1px 1px #000; border-radius: 5px; font-size: 20px; font-weight: bold;mix-blend-mode: multiply;"
                          action="success" value="Часы" icon="ui-icon-copy"/>
     </h:form>
 
