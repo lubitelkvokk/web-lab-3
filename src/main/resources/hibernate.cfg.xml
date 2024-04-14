@@ -7,11 +7,11 @@
 
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/studs</property>
-        <property name="hibernate.connection.username">s367403</property>
-        <property name="hibernate.connection.password">xaoVq03dAHI9DUXL</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5429/postgres</property>
+        <property name="hibernate.connection.username">sa</property>
+        <property name="hibernate.connection.password">1234</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
-
+        <property name="hibernate.show_sql">true</property>
         <mapping class="weblab3.models.Hit"/>
     </session-factory>
 </hibernate-configuration>

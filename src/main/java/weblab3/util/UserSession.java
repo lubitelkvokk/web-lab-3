@@ -11,15 +11,13 @@ import java.io.Serializable;
 
 
 @Named("userSession")
-@RequestScoped
+@SessionScoped
 public class UserSession implements Serializable {
 
-    @Inject
-    private HibernateUtil hibernateUtil;
     private final Session session;
 
     public UserSession(){
-        session = hibernateUtil.getSessionFactory().openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
     }
 
 

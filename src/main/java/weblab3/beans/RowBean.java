@@ -99,7 +99,7 @@ public class RowBean implements Serializable {
             tableBean.addToCurrentResults(hit);
 
         } catch (NumberFormatException e) {
-
+            e.printStackTrace();
         }
     }
 

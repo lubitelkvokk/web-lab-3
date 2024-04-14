@@ -9,18 +9,14 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.io.Serializable;
-
-@Named("hibernateUtil")
-@ApplicationScoped
 public class HibernateUtil implements Serializable {
-    private final SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory;
 
-    public org.hibernate.SessionFactory getSessionFactory() {
+    public static org.hibernate.SessionFactory getSessionFactory() {
+        if (sessionFactory == null){
+            sessionFactory = new Configuration().configure().buildSessionFactory();
+        }
         return sessionFactory;
-    }
-
-    public HibernateUtil() {
-        sessionFactory = new Configuration().configure().buildSessionFactory();
     }
 
     @PreDestroy

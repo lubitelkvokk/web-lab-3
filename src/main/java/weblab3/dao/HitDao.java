@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import weblab3.models.Hit;
+import weblab3.util.HibernateUtil;
 import weblab3.util.UserSession;
 
 import java.io.Serializable;
