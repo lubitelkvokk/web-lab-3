@@ -1,7 +1,6 @@
 package weblab3.models;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import weblab3.util.Decimalise;
 
 import java.text.ParseException;

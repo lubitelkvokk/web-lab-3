@@ -6,14 +6,33 @@
         <fileset dir="lib" includes="**/*.jar"/>
     </path>
 
-    <target name="compile">
-        <mkdir dir="${dst.classes}"/>
+    <path id="classes.path">
+        <fileset dir="${dst.classes}" includes="**/*.class"/>
+    </path>
 
+
+    <target name="compile">
+
+        <echo>Создание директории для классов проекта</echo>
+        <mkdir dir="${dst.classes}"/>
         <javac srcdir="${src.main.java}"
                destdir="${dst.classes}"
                includeantruntime="false">
             <classpath refid="lib.main.path"/>
         </javac>
+
+
+        <echo>Создание директории для классов-тестов</echo>
+        <mkdir dir="${dst.test-classes}"/>
+        <javac srcdir="${src.test.java}"
+               destdir="${dst.test-classes}"
+               includeantruntime="false">
+            <classpath>
+                <path refid="lib.main.path"/>
+                <pathelement location="${dst.classes}"/>
+            </classpath>
+        </javac>
+
     </target>
 
     <target name="build" depends="compile">
@@ -48,4 +67,11 @@
         </war>
 
     </target>
+
+    <target name="clean">
+        <echo>Удаление ${dstDir}</echo>
+        <delete dir="${dst.classes}"/>
+    </target>
+
+
 </project>

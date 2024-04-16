@@ -14,6 +14,14 @@ import java.util.List;
 @Named("table")
 @SessionScoped
 public class TableBean implements Serializable {
+    private List<Hit> tablePage;
+
+    private List<Hit> currentResults = new ArrayList<>();
+    private Integer pageNumber = 1;
+
+    private Integer pageSize = 10;
+    private HitDao hitDao;
+
     public List<Hit> getTablePage() {
         return tablePage;
     }
@@ -30,12 +38,6 @@ public class TableBean implements Serializable {
         this.currentResults = currentResults;
     }
 
-    private List<Hit> tablePage;
-
-    private List<Hit> currentResults = new ArrayList<>();
-    private Integer pageNumber = 1;
-
-    private Integer pageSize = 10;
 
     public Integer getPageSize() {
         return pageSize;
@@ -45,8 +47,6 @@ public class TableBean implements Serializable {
         this.pageSize = pageSize;
     }
 
-
-    private HitDao hitDao;
 
     @Inject
     public TableBean(HitDao hitDao) {
@@ -71,7 +71,7 @@ public class TableBean implements Serializable {
         this.pageNumber = pageNumber;
     }
 
-    public void addToCurrentResults(Hit hit){
+    public void addToCurrentResults(Hit hit) {
         currentResults.add(hit);
     }
 }
