@@ -1,0 +1,51 @@
+<project name="web-lab-3" default="compile" basedir=".">
+
+    <property file="build.properties"/>
+
+    <path id="lib.main.path">
+        <fileset dir="lib" includes="**/*.jar"/>
+    </path>
+
+    <target name="compile">
+        <mkdir dir="${dst.classes}"/>
+
+        <javac srcdir="${src.main.java}"
+               destdir="${dst.classes}"
+               includeantruntime="false">
+            <classpath refid="lib.main.path"/>
+        </javac>
+    </target>
+
+    <target name="build" depends="compile">
+
+        <mkdir dir="${dst.web}"/>
+
+        <mkdir dir="${dst.web.web-inf}"/>
+
+        <echo>Копирование классов</echo>
+        <copy todir="${dst.web.web-inf.classes}">
+            <fileset dir="${dst.classes}" includes="**/*.class"/>
+        </copy>
+
+        <echo>Копирование ресурсов конфигурации</echo>
+        <copy todir="${dst.web.web-inf.classes}">
+            <fileset dir="${src.main.resources}"/>
+        </copy>
+
+        <echo>Копирование библиотек</echo>
+        <copy todir="${dst.web.web-inf.lib}">
+            <fileset dir="lib" includes="**/*.jar"/>
+        </copy>
+
+        <echo>Копирование статических ресурсов</echo>
+        <copy todir="${dst.web}">
+            <fileset dir="${src.main.webapp}"/>
+        </copy>
+
+        <echo>Создание war-архива</echo>
+        <war destfile="${dst.web.war}">
+            <fileset dir="${dst.web}"/>
+        </war>
+
+    </target>
+</project>
