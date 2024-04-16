@@ -73,5 +73,18 @@
         <delete dir="${dst.classes}"/>
     </target>
 
+    <target name="test" depends="compile">
+        <mkdir dir="${dst.reports}"/>
 
+        <junit>
+            <classpath>
+                <pathelement location="${dst.test-classes}"/>
+                <pathelement path="${dst.classes}"/>
+                <pathelement path="lib/junit-4.13.2.jar"/>
+                <pathelement path="lib/hamcrest-core-1.3.jar"/>
+            </classpath>
+            <test name="weblab3.util.HitCheckTest"/>
+            <formatter type="plain" usefile="false" />
+        </junit>
+    </target>
 </project>
