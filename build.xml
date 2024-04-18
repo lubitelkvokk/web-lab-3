@@ -81,7 +81,9 @@
     </target>
 
     <target name="run" depends="deploy">
-        <exec executable="${run.script}"/>
+        <exec executable="sh">
+            <arg value="${run.script}"/>
+        </exec>
     </target>
 
     <target name="clean">
