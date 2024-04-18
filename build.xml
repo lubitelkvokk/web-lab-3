@@ -88,12 +88,18 @@
         <exec executable="cmd.exe" >
             <arg value="/c"/>
             <arg value="${run.script}"/>
+            <arg value="-Djboss.http.port=${port.http}"/>
+            <arg value="-Djboss.https.port=${port.https}"/>
+            <arg value="-Djboss.management.http.port=${port.management.http}"/>
         </exec>
     </target>
 
     <target name="run.unix" depends="deploy" unless="is.windows">
         <exec executable="sh" >
             <arg value="${run.script}"/>
+            <arg value="-Djboss.http.port=${port.http}"/>
+            <arg value="-Djboss.https.port=${port.https}"/>
+            <arg value="-Djboss.management.http.port=${port.management.http}"/>
         </exec>
     </target>
 
