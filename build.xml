@@ -4,7 +4,9 @@
 
     <path id="lib.main.path">
         <fileset dir="lib" includes="**/*.jar"/>
+        <pathelement path="lib/jakarta.jakartaee-api-8.0.0.jar"/>
     </path>
+
 
     <path id="classes.path">
         <fileset dir="${dst.classes}" includes="**/*.class"/>
@@ -12,12 +14,14 @@
 
 
     <target name="compile">
-
+        <property file="env.properties"/>
         <echo>Создание директории для классов проекта</echo>
         <mkdir dir="${dst.classes}"/>
         <javac srcdir="${src.main.java}"
                destdir="${dst.classes}"
-               includeantruntime="false">
+               includeantruntime="false"
+               target="${java.env.version}"
+               source="${java.env.version}">
             <classpath refid="lib.main.path"/>
         </javac>
 
@@ -26,7 +30,9 @@
         <mkdir dir="${dst.test-classes}"/>
         <javac srcdir="${src.test.java}"
                destdir="${dst.test-classes}"
-               includeantruntime="false">
+               includeantruntime="false"
+               target="${java.env.version}"
+               source="${java.env.version}">
             <classpath>
                 <path refid="lib.main.path"/>
                 <pathelement location="${dst.classes}"/>
@@ -68,6 +74,14 @@
 
     </target>
 
+    <target name="deploy" depends="build">
+        <copy todir="${path.to.deploy}" file="${dst.web.war}"/>
+    </target>
+
+    <target name="run" depends="deploy">
+        <exec executable="${run.script}"/>
+    </target>
+
     <target name="clean">
         <echo>Удаление ${dstDir}</echo>
         <delete dir="${dst.classes}"/>
@@ -86,5 +100,54 @@
             <test name="weblab3.util.HitCheckTest" todir="${dst.reports}"/>
             <formatter type="plain"/>
         </junit>
+    </target>
+
+
+    <target name="doc" depends="build"
+            description="Генерация javadoc и добавление в MANIFEST.MF MD5 и SHA-1 файлов проекта">
+        <mkdir dir="${dst.doc}"/>
+        <javadoc sourcepath="${src.main}" destdir="${dst.doc}">
+            <fileset dir="${src.main}"/>
+            <classpath>
+                <path refid="lib.main.path"/>
+            </classpath>
+        </javadoc>
+
+        <jar destfile="${dstDir}/javadoc.jar"
+             basedir="${dst.doc}"
+             update="true">
+        </jar>
+
+    </target>
+
+    <!--    <target name="generate-hashes">-->
+    <!--        <checksum todir="${dst.hash}" algorithm="MD5">-->
+    <!--            <fileset dir="${src.main.java}"/>-->
+    <!--        </checksum>-->
+    <!--        <checksum todir="${dst.hash}" algorithm="SHA-1">-->
+    <!--            <fileset dir="${src.main.java}"/>-->
+    <!--        </checksum>-->
+    <!--    </target>-->
+
+
+    <target name="sign">
+
+
+        <signjar jar="${dst.web.war}"
+                 alias="${key.alias}"
+                 storepass="${keystore.password}"
+                 verbose="true"
+                 sigfile="MANIFEST.MF"
+                 digestalg="SHA-1"/>
+
+        <manifest file="MANIFEST.MF" mode="update">
+            <attribute name="Signature-Version" value="1.0"/>
+            <attribute name="Created-By" value="1.0 (Ant)"/>
+        </manifest>
+    </target>
+
+
+    <target name="env" depends="run">
+
     </target>
 </project>
