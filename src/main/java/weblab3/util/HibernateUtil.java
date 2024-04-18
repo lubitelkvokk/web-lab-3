@@ -9,6 +9,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import java.io.Serializable;
+
+/**
+ * Singleton для получения фабрики сессий
+ */
 public class HibernateUtil implements Serializable {
     private static SessionFactory sessionFactory;
 

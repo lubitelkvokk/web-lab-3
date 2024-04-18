@@ -7,9 +7,11 @@ import java.text.ParseException;
 import java.util.Date;
 
 
+/**
+ * Модель попадания
+ */
 @Entity
 @Table(name = "hit")
-
 public class Hit {
 
     public Hit(Double x, Double y, Double r, Date currentTime, boolean hitResult) {

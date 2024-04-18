@@ -18,7 +18,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Основное взаимодействие с таблицей результатов в базе данных
+ */
 @Named("hitDao")
 @SessionScoped
 public class HitDao implements Serializable {
@@ -27,6 +29,10 @@ public class HitDao implements Serializable {
     private UserSession userSession;
 
 
+    /**
+     * Добавление результата в базу данных
+     * @param hit
+     */
     public void addHit(Hit hit) {
         Session session = userSession.getSession();
         try {
@@ -41,6 +47,12 @@ public class HitDao implements Serializable {
 
     //    public List<Hit> getPaginationHitList(Integer pageSize, Integer pageNumber) {
 
+    /**
+     * Получение списка результатов попаданий с учетом пагинации
+     * @param pageSize
+     * @param pageNumber
+     * @return
+     */
     public List<Hit> getPaginationHitList(int pageSize, int pageNumber) {
         System.out.println(pageNumber);
         Session session = userSession.getSession();

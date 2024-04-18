@@ -2,6 +2,13 @@
 
     public class HitCheck {
 
+        /**
+         * Проверка попадания в заданную область
+         * @param x
+         * @param y
+         * @param r
+         * @return
+         */
         public static boolean hitCheck(Double x, Double y, Double r) {
             if (x < -5 || x > 5 || y < -5 || y > 3 || r < 1 || r > 4) {
                 throw new NumberFormatException("Unexpected number format or values aren't in range");

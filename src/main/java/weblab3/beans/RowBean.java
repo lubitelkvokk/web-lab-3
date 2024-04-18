@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.Date;
 
+
 @Named("rowBean")
 @SessionScoped
 public class RowBean implements Serializable {
@@ -31,6 +32,9 @@ public class RowBean implements Serializable {
     private TableBean tableBean;
 
     public RowBean() {
+        x = 1;
+        y = 1;
+        r = 1;
     }
 
     public RowBean(double x, double y, double r, Date currentTime, Boolean isHit) {
@@ -41,9 +45,6 @@ public class RowBean implements Serializable {
         this.isHit = isHit;
     }
 
-    public String getMessage() {
-        return "pacsss o";
-    }
 
     public double getX() {
         return x;
@@ -85,6 +86,9 @@ public class RowBean implements Serializable {
         this.isHit = isHit;
     }
 
+    /**
+     * Метод осуществляющий добавление попаданий из представления в хранилище
+     */
     public void addToTable() {
         try {
             Date date = new Date();
