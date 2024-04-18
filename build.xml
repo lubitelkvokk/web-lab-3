@@ -2,6 +2,10 @@
 
     <property file="build.properties"/>
 
+    <condition property="is.windows">
+        <os family="windows"/>
+    </condition>
+
     <path id="lib.main.path">
         <fileset dir="lib" includes="**/*.jar"/>
         <pathelement path="lib/jakarta.jakartaee-api-8.0.0.jar"/>
@@ -80,11 +84,20 @@
         </copy>
     </target>
 
-    <target name="run" depends="deploy">
-        <exec executable="sh">
+    <target name="run.windows" depends="deploy" if="is.windows">
+        <exec executable="cmd.exe" >
+            <arg value="/c"/>
             <arg value="${run.script}"/>
         </exec>
     </target>
+
+    <target name="run.unix" depends="deploy" unless="is.windows">
+        <exec executable="sh" >
+            <arg value="${run.script}"/>
+        </exec>
+    </target>
+
+
 
     <target name="clean">
         <echo>Удаление ${dstDir}</echo>
@@ -151,7 +164,7 @@
     </target>
 
 
-    <target name="env" depends="run">
+    <target name="env" depends="run.windows, run.unix">
 
     </target>
 </project>
