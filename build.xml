@@ -75,7 +75,9 @@
     </target>
 
     <target name="deploy" depends="build">
-        <copy todir="${path.to.deploy}" file="${dst.web.war}"/>
+        <copy todir="${path.to.deploy}">
+            <fileset dir="${dstDir}" includes="**/*.war"/>
+        </copy>
     </target>
 
     <target name="run" depends="deploy">
