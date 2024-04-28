@@ -1,5 +1,11 @@
 <project name="web-lab-3" default="compile" basedir=".">
 
+    <taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath>
+            <pathelement location="lib/ant-contrib-1.0b3.jar"/>
+        </classpath>
+    </taskdef>
+
     <property file="build.properties"/>
 
     <condition property="is.windows">
@@ -85,7 +91,7 @@
     </target>
 
     <target name="run.windows" depends="deploy" if="is.windows">
-        <exec executable="cmd.exe" >
+        <exec executable="cmd.exe">
             <arg value="/c"/>
             <arg value="${run.script}"/>
             <arg value="-Djboss.http.port=${port.http}"/>
@@ -95,7 +101,7 @@
     </target>
 
     <target name="run.unix" depends="deploy" unless="is.windows">
-        <exec executable="sh" >
+        <exec executable="sh">
             <arg value="${run.script}"/>
             <arg value="-Djboss.http.port=${port.http}"/>
             <arg value="-Djboss.https.port=${port.https}"/>
@@ -104,10 +110,9 @@
     </target>
 
 
-
     <target name="clean">
         <echo>Удаление ${dstDir}</echo>
-        <delete dir="${dst.classes}"/>
+        <delete dir="${dstDir}"/>
     </target>
 
     <target name="test" depends="compile">
@@ -127,7 +132,7 @@
 
 
     <target name="doc" depends="build"
-            description="Генерация javadoc и добавление в MANIFEST.MF MD5 и SHA-1 файлов проекта">
+            description="Генерация javadoc и добавление в MANIFEST.MF MD5 и SHA-1">
         <mkdir dir="${dst.doc}"/>
         <javadoc sourcepath="${src.main}" destdir="${dst.doc}">
             <fileset dir="${src.main}"/>
@@ -141,17 +146,15 @@
              update="true">
         </jar>
 
+        <checksum algorithm="MD5" todir="${dst.hash}" format="MD5SUM">
+            <fileset dir="${src.main.java}" includes="**/*.java"/>
+        </checksum>
+        <checksum algorithm="SHA1" todir="${dst.hash}">
+            <fileset dir="${src.main.java}" includes="**/*.java"/>
+        </checksum>
+
+
     </target>
-
-    <!--    <target name="generate-hashes">-->
-    <!--        <checksum todir="${dst.hash}" algorithm="MD5">-->
-    <!--            <fileset dir="${src.main.java}"/>-->
-    <!--        </checksum>-->
-    <!--        <checksum todir="${dst.hash}" algorithm="SHA-1">-->
-    <!--            <fileset dir="${src.main.java}"/>-->
-    <!--        </checksum>-->
-    <!--    </target>-->
-
 
     <target name="sign">
 
@@ -171,6 +174,56 @@
 
 
     <target name="env" depends="run.windows, run.unix">
-
     </target>
+
+    <target name="check.tests" depends="test">
+        <property name="tests.passed" value="true"/>
+        <path id="test.files">
+            <fileset dir="${dst.reports}" includes="TEST-*.txt"/>
+        </path>
+        <for param="file">
+            <path>
+                <fileset dir="${dst.reports}" includes="**/TEST*"/>
+            </path>
+            <sequential>
+                <antcall target="check.test">
+                    <param name="file.name" value="@{file}"/>
+                </antcall>
+            </sequential>
+        </for>
+        <if>
+            <equals arg1="${tests.passed}" arg2="true"/>
+            <then>
+                <antcall target="add.post"/>
+            </then>
+        </if>
+    </target>
+
+    <target name="check.test">
+        <property name="test.file" location="${dst.reports}"/>
+        <loadfile srcFile="${test.file}" property="testResults"/>
+        <condition property="test.passed">
+            <and>
+                <contains string="${testResults}" substring="Failures: 0"/>
+                <contains string="${testResults}" substring="Errors: 0"/>
+            </and>
+
+        </condition>
+        <property name="tests.passed" value="${tests.passed}&amp;&amp;${test.passed}"/>
+    </target>
+
+    <target name="add.post">
+        <property file="vk.api.properties"/>
+        <echo message="${request}"/>
+        <echo message="URL: ${url}"/>
+        <exec executable="curl">
+            <arg value="-X"/>
+            <arg value="POST"/>
+            <arg value="-d"/>
+            <arg value="${request}"/>
+            <arg value="${url}"/>
+        </exec>
+    </target>
+
+
 </project>

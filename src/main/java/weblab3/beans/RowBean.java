@@ -31,6 +31,9 @@ public class RowBean implements Serializable {
     @Inject
     private TableBean tableBean;
 
+    @Inject
+    private HitCounterBean hitCounterBean;
+
     public RowBean() {
         x = 1;
         y = 1;
@@ -97,11 +100,12 @@ public class RowBean implements Serializable {
 
             Hit hit = new Hit(x, y, r,
                     date,
-                    HitCheck.hitCheck(x, y, r));
+                    isHit);
 
             hitDao.addHit(hit);
             tableBean.addToCurrentResults(hit);
-
+            if (isHit) hitCounterBean.incGeneralHitCount();
+            else hitCounterBean.incMissHitCount();
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }

@@ -1,6 +1,5 @@
 package weblab3.dao;
 
-import jakarta.annotation.Priority;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
@@ -11,11 +10,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import weblab3.models.Hit;
-import weblab3.util.HibernateUtil;
+import weblab3.models.HitStatistic;
+
 import weblab3.util.UserSession;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -66,6 +65,33 @@ public class HitDao implements Serializable {
         query.setMaxResults(pageSize);
         return query.getResultList();
     }
+
+
+    public HitStatistic getHitCount(){
+        HitStatistic hitStatistic = new HitStatistic();
+        Session session = userSession.getSession();
+
+        // Подсчитываем количество попаданий
+        CriteriaBuilder builder = session.getCriteriaBuilder();
+        CriteriaQuery<Long> hitCountQuery = builder.createQuery(Long.class);
+        Root<Hit> root = hitCountQuery.from(Hit.class);
+        hitCountQuery.select(builder.count(root));
+//        hitCountQuery.where(builder.equal(root.get("hitResult"), true));
+        Long hitCount = session.createQuery(hitCountQuery).getSingleResult();
+        hitStatistic.setHitCount(hitCount.intValue());
+
+        CriteriaQuery<Long> missHitCountQuery = builder.createQuery(Long.class);
+        Root<Hit> missRoot = missHitCountQuery.from(Hit.class);
+        missHitCountQuery.select(builder.count(missRoot));
+        missHitCountQuery.where(builder.equal(missRoot.get("hitResult"), false)); // Предположим, что hitResult - это поле, обозначающее попадание
+        Long missHitCount = session.createQuery(missHitCountQuery).getSingleResult();
+        hitStatistic.setMissHitCount(missHitCount.intValue());
+
+        System.out.println(hitCount.intValue());
+        System.out.println(missHitCount.intValue());
+        return hitStatistic;
+    }
+
 
 
 }
