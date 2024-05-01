@@ -4,14 +4,12 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 
+import lombok.NoArgsConstructor;
 import weblab3.dao.HitDao;
 import weblab3.models.Hit;
-import weblab3.util.Decimalise;
 import weblab3.util.HitCheck;
 
 import java.io.Serializable;
-import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.util.Date;
 
 
@@ -21,6 +19,9 @@ public class RowBean implements Serializable {
 
     @Inject
     private HitDao hitDao;
+
+    @Inject
+    private PercentHitBean percentHitBean;
 
 
     private double x;

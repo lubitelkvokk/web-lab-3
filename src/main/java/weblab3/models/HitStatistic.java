@@ -13,7 +13,7 @@ public class HitStatistic {
         this.hitCount = hitCount;
     }
 
-    public int getMissHitCound() {
+    public int getMissHitCount() {
         return missHitCound;
     }
 

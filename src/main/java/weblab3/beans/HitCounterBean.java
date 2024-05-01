@@ -1,17 +1,21 @@
 package weblab3.beans;
 
-import jakarta.enterprise.context.Dependent;
-import jakarta.enterprise.context.SessionScoped;
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import lombok.NoArgsConstructor;
 import weblab3.dao.HitDao;
 import weblab3.models.HitStatistic;
+import weblab3.util.ManagementUtil;
 
+import javax.management.Notification;
+import javax.management.NotificationBroadcasterSupport;
 import java.io.Serializable;
 
 @Named
-@Dependent
-public class HitCounterBean implements Serializable {
+@ApplicationScoped
+@NoArgsConstructor
+public class HitCounterBean extends NotificationBroadcasterSupport implements HitCounterMXBean, Serializable {
 
     private int generalHitCount;
     private int missHitCount;
@@ -20,7 +24,13 @@ public class HitCounterBean implements Serializable {
     public HitCounterBean(HitDao hitDao) {
         HitStatistic hitStatistic = hitDao.getHitCount();
         generalHitCount = hitStatistic.getHitCount();
-        missHitCount = hitStatistic.getMissHitCound();
+        missHitCount = hitStatistic.getMissHitCount();
+        try {
+            ManagementUtil.registerBean(this);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        checkAndSendNotification();
     }
 
     public int getGeneralHitCount() {
@@ -33,6 +43,7 @@ public class HitCounterBean implements Serializable {
 
     public void incGeneralHitCount() {
         this.generalHitCount++;
+        checkAndSendNotification();
     }
 
     public int getMissHitCount() {
@@ -43,9 +54,21 @@ public class HitCounterBean implements Serializable {
         this.missHitCount = missHitCount;
     }
 
-
     public void incMissHitCount() {
         this.missHitCount++;
         incGeneralHitCount();
     }
+
+    private synchronized void checkAndSendNotification() {
+        if (generalHitCount % 10 == 0) {
+            Notification notification = new Notification(
+                    "HitCountNotification",
+                    this,
+                    System.currentTimeMillis(),
+                    "Total hit count is now a multiple of 10: " + generalHitCount
+            );
+            sendNotification(notification);
+        }
+    }
 }
+
